@@ -1,0 +1,19 @@
+.mainNav {
+  margin: 15px auto;
+  text-align: center;
+}
+
+.mainNav li {
+  margin: 5px;
+}
+
+.mainNav li a {
+  text-decoration: none;
+  color: rgb(53, 136, 53);
+}
+
+.mainNav a:hover,
+.mainNav a.active {
+  text-decoration: underline;
+  color: white;
+}
