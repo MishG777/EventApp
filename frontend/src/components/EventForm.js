@@ -9,7 +9,8 @@ function EventForm({ method, event }) {
   }
 
   return (
-    <Form method="post" action="/any path here" className={classes.form}>
+    <Form method="POST" className={classes.form}>
+      {/* now its sending request on the currently active path */}
       <p>
         <label htmlFor="title">Title</label>
         <input

@@ -2,7 +2,12 @@ import classes from "./EventsList.module.css";
 import { Link } from "react-router-dom";
 
 function EventsList({ events }) {
-  // console.log(events);
+  console.log(events);
+
+  if (events[0] !== events[1].id && events[0].image === events[1].image) {
+    events[0].title += " edited";
+  }
+
   return (
     <div className={classes.events}>
       <h1>All Events</h1>

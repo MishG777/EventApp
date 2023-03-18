@@ -43,7 +43,15 @@ const router = createBrowserRouter([
                 action: deleteEventAction,
               },
 
-              { path: "edit", element: <EditEventPage /> },
+              {
+                path: "edit",
+                element: <EditEventPage />,
+                action: newEventAction,
+                //we also add it here because, then we're on '/edit' page/mode
+                //hence our currently active path is '/edit' and the POST request
+                //from the Form is sending there, so there should be this action
+                //to activate it
+              },
             ],
           },
 
