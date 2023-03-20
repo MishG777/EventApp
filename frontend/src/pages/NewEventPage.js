@@ -11,7 +11,7 @@ export default NewEventPage;
 export async function action({ request, params }) {
   const data = await request.formData();
 
-  console.log(request);
+  // console.log(request);
   const eventData = {
     title: data.get("title"),
     image: data.get("image"),
@@ -26,6 +26,11 @@ export async function action({ request, params }) {
     },
     body: JSON.stringify(eventData),
   });
+
+  if (response.status === 422) {
+    console.log(response);
+    return response;
+  }
 
   if (!response.ok) {
     throw json({ message: "Could not send the Data" }, { status: 500 });
