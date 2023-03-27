@@ -3,6 +3,8 @@ import {
   Form,
   useNavigation,
   useActionData,
+  redirect,
+  json,
 } from "react-router-dom";
 
 import classes from "./EventForm.module.css";
@@ -20,7 +22,7 @@ function EventForm({ method, event }) {
   }
 
   return (
-    <Form method="POST" className={classes.form}>
+    <Form method={method} className={classes.form}>
       {/* now its sending request on the currently active path */}
 
       {data && data.errors && (
@@ -84,3 +86,42 @@ function EventForm({ method, event }) {
 }
 
 export default EventForm;
+
+export async function action({ request, params }) {
+  const method = request.method;
+  const data = await request.formData();
+
+  // console.log(request);
+  const eventData = {
+    title: data.get("title"),
+    image: data.get("image"),
+    date: data.get("date"),
+    description: data.get("description"),
+  };
+
+  let URL = "http://localhost:8080/events";
+
+  if (method === "PATCH") {
+    const eventId = params.eventId;
+    URL = "http://localhost:8080/events/" + eventId;
+  }
+
+  const response = await fetch(URL, {
+    method: method,
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(eventData),
+  });
+
+  if (response.status === 422) {
+    console.log(response);
+    return response;
+  }
+
+  if (!response.ok) {
+    throw json({ message: "Could not send the Data" }, { status: 500 });
+  }
+
+  return redirect("/events");
+}
