@@ -8,7 +8,7 @@ function NewsletterSignup() {
   const { data, state } = fetcher;
   console.log(data);
   useEffect(() => {
-    //'idle' ==> means we're not a executing an action any more
+    //'idle' ==> means we're not executing an action any more
     if (state === "idle" && data && data.message) {
       window.alert(data.message);
     }
