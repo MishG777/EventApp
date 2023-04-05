@@ -4,7 +4,7 @@ import { Link, useSubmit } from "react-router-dom";
 function EventItem({ event }) {
   const submit = useSubmit();
 
-  console.log(submit);
+  console.log(event);
   function startDeleteHandler() {
     const proceed = window.confirm("Are you sure?");
 
